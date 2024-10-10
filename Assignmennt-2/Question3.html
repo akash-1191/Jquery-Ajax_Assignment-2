@@ -1,0 +1,67 @@
+<!-- Question3.Write jQuery code to toggle the visibility of a div element when a button is clicked. The div
+should start as hidden, and clicking the button should alternate between showing and hiding
+it. -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question3</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <nav>
+        <a href="randam_nummber.html">
+            <li>Question1</li>
+        </a>
+        <a href="Question2.html">
+            <li>Question2</li>
+        </a>
+        <a href="Question3.html">
+            <li>Question3</li>
+        </a>
+        <a href="Question4.html">
+            <li>Question4</li>
+        </a>
+        <a href="question5.html">
+            <li>Question5</li>
+        </a>
+        <a href="Question6.html">
+            <li>Question6</li>
+        </a>
+        <a href="Question7.html">
+            <li>Question7</li>
+        </a>
+        <a href="Question8.html">
+            <li>Question8</li>
+        </a>
+        <a href="question9.html">
+            <li>Question9</li>
+        </a>
+        <a href="Quetion10.html">
+            <li>Question10</li>
+        </a>
+    </nav>
+
+    <div id="toggleDiv">
+        Click the button the div hide and again click the button then show the div.
+    </div>
+    <div class="button">
+        <button id="toggleButton">Toggle Button</button>
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#toggleButton').click(function () {
+                $('#toggleDiv').toggle();
+            });
+        });
+    </script>
+</body>
+
+</html>
