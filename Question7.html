@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question7</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <nav>
+        <a href="Question1.html">
+            <li>Question1</li>
+        </a>
+        <a href="Question2.html">
+            <li>Question2</li>
+        </a>
+        <a href="Question3.html">
+            <li>Question3</li>
+        </a>
+        <a href="Question4.html">
+            <li>Question4</li>
+        </a>
+        <a href="question5.html">
+            <li>Question5</li>
+        </a>
+        <a href="Question6.html">
+            <li>Question6</li>
+        </a>
+        <a href="Question7.html">
+            <li>Question7</li>
+        </a>
+        <a href="Question8.html">
+            <li>Question8</li>
+        </a>
+        <a href="question9.html">
+            <li>Question9</li>
+        </a>
+        <a href="Question10.html">
+            <li>Question10</li>
+        </a>
+    </nav>
+    <section class="section6">
+        <div class="container2">
+            <div class="autocomplete-container">
+                <input type="text" id="search" placeholder="Search..." autocomplete="off">
+                <div id="suggestions" class="suggestions"></div>
+            </div>
+        </div>
+    </section>
+    <script>
+
+        $(document).ready(function () {
+            $('#search').on('keyup', function () {
+                const query = $(this).val();
+
+                if (query.length > 0) {
+                    $.ajax({
+                        url: 'https://api.example.com/search',
+                        method: 'GET',
+                        data: { q: query },
+                        dataType: 'json',
+                        success: function (data) {
+                            // Clear previous suggestions
+                            $('#suggestions').empty();
+
+                            // Check if there are any suggestions
+                            if (data.length > 0) {
+                                // Populate suggestions
+                                data.forEach(item => {
+                                    $('#suggestions').append(`<div class="suggestion-item">${item.name}</div>`); // Adjust property name as needed
+                                });
+                                $('#suggestions').show(); // Show suggestions
+                            } else {
+                                $('#suggestions').hide(); // Hide if no results
+                            }
+                        },
+                        error: function () {
+                            console.error('Error fetching suggestions');
+                        }
+                    });
+                } else {
+                    $('#suggestions').hide(); // Hide suggestions if input is empty
+                }
+            });
+
+            // Handle suggestion click
+            $(document).on('click', '.suggestion-item', function () {
+                $('#search').val($(this).text());
+                $('#suggestions').hide(); // Hide suggestions after selection
+            });
+
+            // Hide suggestions when clicking outside
+            $(document).click(function (event) {
+                if (!$(event.target).closest('.autocomplete-container').length) {
+                    $('#suggestions').hide(); // Hide suggestions when clicking outside
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question6 Weather Information</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav>
+        <a href="Question1.html">
+            <li>Question1</li>
+        </a>
+        <a href="Question2.html">
+            <li>Question2</li>
+        </a>
+        <a href="Question3.html">
+            <li>Question3</li>
+        </a>
+        <a href="Question4.html">
+            <li>Question4</li>
+        </a>
+        <a href="question5.html">
+            <li>Question5</li>
+        </a>
+        <a href="Question6.html">
+            <li>Question6</li>
+        </a>
+        <a href="Question7.html">
+            <li>Question7</li>
+        </a>
+        <a href="Question8.html">
+            <li>Question8</li>
+        </a>
+        <a href="question9.html">
+            <li>Question9</li>
+        </a>
+        <a href="Question10.html">
+            <li>Question10</li>
+        </a>
+    </nav>
+
+    <section class="section6">
+        <div class="container2">
+            <h1 class="heading6">Weather Information</h1>
+            <form id="weather-form">
+                <input type="text" id="city" placeholder="Enter city name" required>
+                <button class="submitbutton" type="submit">Get Weather</button>
+            </form>
+            <div id="weather-display" class="weather-display"></div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('weather-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const city = document.getElementById('city').value;
+            const apiKey = 'c0b89a03dcaf4d9b892182307241310'; 
+            const apiUrl = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`;
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', apiUrl, true);
+
+            xhr.onload = function () {
+                const weatherDisplay = document.getElementById('weather-display');
+
+                if (this.status === 200) {
+                    const data = JSON.parse(this.responseText);
+                    displayWeather(data);
+                } else if (this.status === 400 || this.status === 404) {
+                    alert('City not found! Please try again.'); 
+                } else {
+                    weatherDisplay.style.display = 'block';
+                    weatherDisplay.innerHTML = `<p class="error">An error occurred. Please try again later.</p>`;
+                }
+            };
+
+            xhr.send();
+        });
+
+        function displayWeather(data) {
+            const weatherDisplay = document.getElementById('weather-display');
+            weatherDisplay.style.display = 'block';
+
+            const html = `
+                <p><strong>City:</strong> ${data.location.name}</p>
+                <p><strong>Region:</strong> ${data.location.region}</p>
+                <p><strong>Country:</strong> ${data.location.country}</p>
+                <p><strong>Temperature:</strong> ${data.current.temp_c}°C</p>
+                <p><strong>Weather:</strong> ${data.current.condition.text}</p>
+                <p><strong>Humidity:</strong> ${data.current.humidity}%</p>
+                <p><strong>Wind Speed:</strong> ${data.current.wind_kph} kph</p>
+            `;
+
+            weatherDisplay.innerHTML = html;
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question9</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        #itemsList {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="Question1.html">
+            <li>Question1</li>
+        </a>
+        <a href="Question2.html">
+            <li>Question2</li>
+        </a>
+        <a href="Question3.html">
+            <li>Question3</li>
+        </a>
+        <a href="Question4.html">
+            <li>Question4</li>
+        </a>
+        <a href="question5.html">
+            <li>Question5</li>
+        </a>
+        <a href="Question6.html">
+            <li>Question6</li>
+        </a>
+        <a href="Question7.html">
+            <li>Question7</li>
+        </a>
+        <a href="Question8.html">
+            <li>Question8</li>
+        </a>
+        <a href="question9.html">
+            <li>Question9</li>
+        </a>
+        <a href="Question10.html">
+            <li>Question10</li>
+        </a>
+    </nav>
+    <section class="section2">
+        <div class="container2">
+            <h1>Items List</h1>
+            <ul id="itemsList"></ul>
+            <button id="loadMore" style="display: none;">Load More</button>
+        </div>
+    </section>
+
+    <script>
+        let currentPage = 1;
+        const itemsPerPage = 5;
+
+        $(document).ready(function () {
+            loadItems();
+
+
+            $('#loadMore').on('click', function () {
+                currentPage++;
+                loadItems();
+            });
+        });
+
+        function loadItems() {
+            $.ajax({
+                url: `https://jsonplaceholder.typicode.com/posts?_page=${currentPage}&_limit=${itemsPerPage}`,
+                method: 'GET',
+                success: function (data) {
+                    if (data.length > 0) {
+                        data.forEach(item => {
+                            $('#itemsList').append(`<li>${item.title}</li>`);
+                        });
+                        $('#loadMore').show();
+                    } else {
+                        $('#loadMore').hide();
+                    }
+                },
+                error: function () {
+                    console.error('Error fetching items');
+                }
+            });
+        }
+
+    </script>
+</body>
+
+</html>

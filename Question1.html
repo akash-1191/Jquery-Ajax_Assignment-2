@@ -1,0 +1,154 @@
+<!-- Question1. Create a simple HTML form with fields for name, email, and a submit button. Field name
+and email should have relevant validation. Use jQuery to prevent the form from submitting
+when the submit button is clicked and instead display an alert with the form data. -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question1</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <nav>
+        <a href="Question1.html">
+            <li>Question1</li>
+        </a>
+        <a href="Question2.html">
+            <li>Question2</li>
+        </a>
+        <a href="Question3.html">
+            <li>Question3</li>
+        </a>
+        <a href="Question4.html">
+            <li>Question4</li>
+        </a>
+        <a href="question5.html">
+            <li>Question5</li>
+        </a>
+        <a href="Question6.html">
+            <li>Question6</li>
+        </a>
+        <a href="Question7.html">
+            <li>Question7</li>
+        </a>
+        <a href="Question8.html">
+            <li>Question8</li>
+        </a>
+        <a href="question9.html">
+            <li>Question9</li>
+        </a>
+        <a href="Question10.html">
+            <li>Question10</li>
+        </a>
+    </nav>
+
+    <section class="section2">
+        <div class="container2">
+            <div class="main2">
+                <form id="myForm">
+                    <label class="label2" for="name">Enter Name</label>
+                    <input class="input2" type="text" name="name" id="name" placeholder="Enter The Name">
+                    <span id="nameError" class="error"></span><br>
+
+                    <label class="label2" for="email">Enter Email</label>
+                    <input class="input2" type="text" name="email" id="email" placeholder="Email Address">
+                    <span id="emailError" class="error"></span><br>
+
+                    <div class="btn2">
+                        <input type="submit" class="button2" value="Submit">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+<!-- 
+    <script>
+        $(document).ready(function () {
+            function validateName() {
+                var name = $("#name").val();
+                $("#nameError").text("");
+                if (name === "") {
+                    $("#nameError").text("Please enter the Name");
+                    return false;
+                } else if (name.length < 3) {
+                    $("#nameError").text("Name must be at least 3 characters long");
+                    return false;
+                }
+                return true;
+            }
+
+            function validateEmail() {
+                var email = $("#email").val();
+                var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+                $("#emailError").text(""); 
+                if (email === "") {
+                    $("#emailError").text("Please enter Email");
+                    return false;
+                } else if (!emailPattern.test(email)) {
+                    $("#emailError").text("Please enter a valid email address");
+                    return false;
+                }
+                return true;
+            }
+          
+            $("#name").on("keyup", function () {
+                validateName();
+            });
+
+            $("#email").on("keyup", function () {
+                validateEmail();
+            });
+
+            $("#myForm").on("submit", function (event) {
+                event.preventDefault();
+
+                var isValidName = validateName();
+                var isValidEmail = validateEmail();
+
+                if (isValidName && isValidEmail) {
+                    var name = $("#name").val();
+                    var email = $("#email").val();
+                    alert("Name: " + name + "\nEmail: " + email);
+                }
+            });
+        });
+    </script> -->
+    <script>
+        $(document).ready(function () {
+            $("#myForm").on("submit", function (event) {
+                event.preventDefault();
+    
+                var name = $("#name").val();
+                var email = $("#email").val();
+                var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    
+                $("#nameError").text("");
+                $("#emailError").text("");
+    
+                if (name === "") {
+                    $("#nameError").text("Please enter the Name");
+                    return;
+                } else if (name.length < 3) {
+                    $("#nameError").text("Name must be at least 3 characters long");
+                    return;
+                }
+    
+                if (email === "") {
+                    $("#emailError").text("Please enter Email");
+                    return;
+                } else if (!emailPattern.test(email)) {
+                    $("#emailError").text("Please enter a valid email address");
+                    return;
+                }
+    
+                alert("Name: " + name + "\nEmail: " + email);
+            });
+        });
+    </script>
+</body>
+
+</html>
